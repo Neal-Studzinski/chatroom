@@ -18,9 +18,9 @@ function Message(username,body) {  // Constructor for message
 	this.timestamp = timestamp; // Creates instance of timestamp
 	this.save = function() {
 							let postData = {  // for posting to chat
-								sender: this.sender,
-								body: this.body,
-								timestamp: this.timestamp,
+								sender: this.sender, //sender name
+								body: this.body, // sender message
+								timestamp: this.timestamp, // timestamp of message
 
 							}
 							let settings = { // settings for posting to tiny-za-server
@@ -38,7 +38,7 @@ function Message(username,body) {  // Constructor for message
 
 function renderChatHistory(item){ // Creates output with delete button
 		let element = '<li class="list-group-item"><p>'+item.timestamp+ " "+'<p>' +item.sender+'</p>'+" "+item.body
-		if (item.sender == currentUser.username)
+		if (item.sender == currentUser.username) // logged in
 			element += '<button type="button" class="btn btn-default deleteBtn" id="'+item._id+'">Delete</button>';
 		element += '</li>'  // wrappes up the list
 		$('.list-group').prepend(element); // adds element to the bottom using prepend
@@ -52,12 +52,12 @@ function getChatHistory() { // shows the chat history after login
 	}
 	$.ajax(settings).then(function(data,status,xhr){ // if the new data matches the history, console 'nothing new'
 					if (JSON.stringify(data) === JSON.stringify(currentChatHistory)) {
-							console.log("nothing new to show")
+							console.log("Nothing new to show")
 					}
 					else {
 						console.log(data,currentChatHistory)
 						currentChatHistory = data;
-						$('.list-group').empty();
+						$('.list-group').empty(); // adds data to an empty list
 			data.forEach(function(item,index,array) {
 				renderChatHistory(item);
 			})

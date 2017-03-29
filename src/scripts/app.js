@@ -71,7 +71,7 @@ function deleteListItem(id) {  // Deletes list item from chat
 		url: url+db+'/'+id,
 	}
 	$.ajax(settings).then(function(data,status,xhr) {
-				getChatHistory();
+				getChatHistory(); // then renders updated chat history
 	})
 }
 
@@ -93,8 +93,8 @@ function loadView() { // loads views with delete button as needed
 		renderChatView();
 	}
 	else {
-		console.log("no user logged in! ", currentUser)
-		renderLoginView();
+		console.log("No user logged in! ", currentUser) // shows no user in console log
+		renderLoginView(); // shows login
 	}
 }
 
@@ -107,13 +107,13 @@ function loadView() { // loads views with delete button as needed
 	$('#submitBtn').on('click',function(e){ // Saves new message
 		console.log(currentUser, currentUser.username)
 	  let formVal = $('#newItemForm').val();
-	  let newMsg = new Message(currentUser.username,formVal);
+	  let newMsg = new Message(currentUser.username,formVal); // Message constructor
 		newMsg.save();
 	})
 
 	$('#loginBtn').on('click',function(e){ // login button creates new UserSession
 	  let formVal = $('#userName').val();
-	  currentUser = new UserSession(formVal);
+	  currentUser = new UserSession(formVal); // User Session constructor
 		loadView();
 	})
 
